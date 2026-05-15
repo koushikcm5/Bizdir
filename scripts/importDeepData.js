@@ -1293,7 +1293,7 @@ function parseData(text) {
 
     if (bus.name) {
       // Ensure premium images are used instead of example.com placeholders
-      const cat = (bus.category || '').toLowerCase();
+      const cat = (bus.category || '').toLowerCase().replace(/\s+/g, '-');
       bus.images = [`/assets/dummy/${cat}.png`];
       businesses.push(bus);
     }

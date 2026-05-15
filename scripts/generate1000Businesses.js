@@ -96,7 +96,7 @@ function generateBusiness(index) {
     featured: Math.random() > 0.8,
     lat: pos.lat,
     lng: pos.lng,
-    images: [`/assets/dummy/${category.name.toLowerCase()}.png`],
+    images: [`/assets/dummy/${category.name.toLowerCase().replace(/\s+/g, '-')}.png`],
     tags: [category.name.toLowerCase(), "service", "professional", "tamilnadu", district.toLowerCase()],
     createdBy: "admin",
     createdAt: serverTimestamp(),
