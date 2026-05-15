@@ -34,7 +34,7 @@ const BusinessDetailPage = () => {
   const [activeImg, setActiveImg] = useState(0);
   const [reviewForm, setReviewForm] = useState({ rating: 0, comment: '' });
   const [submitting, setSubmitting] = useState(false);
-  const isSaved = shortlisted.includes(id);
+  const [imgErrors, setImgErrors] = useState({});
 
   useEffect(() => {
     Promise.all([getBusinessById(id), getReviewsForBusiness(id)])
@@ -44,6 +44,10 @@ const BusinessDetailPage = () => {
       })
       .finally(() => setLoading(false));
   }, [id]);
+
+  const handleImgError = (index) => {
+    setImgErrors(prev => ({ ...prev, [index]: true }));
+  };
 
   const handleSave = async () => {
     if (!user) { toast.error('Login to save'); return; }
@@ -107,25 +111,33 @@ const BusinessDetailPage = () => {
             {/* Images */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-card border border-surface-100">
               <div className="relative h-64 sm:h-80 bg-surface-100">
-                {business.images?.length > 0 ? (
-                  <img src={business.images[activeImg]} alt={business.name} className="w-full h-full object-cover" />
+                {business.images?.length > 0 && !imgErrors[activeImg] ? (
+                  <img 
+                    src={business.images[activeImg]} 
+                    alt={business.name} 
+                    className="w-full h-full object-cover" 
+                    onError={() => handleImgError(activeImg)}
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
                     <Building2 size={64} className="text-surface-300" />
                   </div>
                 )}
               </div>
-              {business.images?.length > 1 && (
+              {business.images?.filter((_, i) => !imgErrors[i]).length > 1 && (
                 <div className="flex gap-2 p-3">
-                  {business.images.map((img, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImg(i)}
-                      className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${i === activeImg ? 'border-primary-500' : 'border-transparent'}`}
-                    >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
+                  {business.images.map((img, i) => {
+                    if (imgErrors[i]) return null;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImg(i)}
+                        className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${i === activeImg ? 'border-primary-500' : 'border-transparent'}`}
+                      >
+                        <img src={img} alt="" className="w-full h-full object-cover" onError={() => handleImgError(i)} />
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
