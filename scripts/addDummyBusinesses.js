@@ -21,70 +21,70 @@ const db = getFirestore(app);
 const businessTemplates = {
   'Restaurants': [
     {
-      name: 'Spice Garden Restaurant',
-      description: 'Authentic Kerala cuisine with traditional recipes passed down through generations. Specializing in seafood and vegetarian dishes.',
+      name: 'Chennai Spice Garden',
+      description: 'Authentic Tamil Nadu cuisine with traditional recipes. Specializing in Chettinad dishes and vegetarian meals.',
       phone: '+91 98765 43210',
-      email: 'contact@spicegarden.com',
-      website: 'https://spicegarden.com',
-      address: 'MG Road, Near City Center',
-      tags: ['kerala cuisine', 'seafood', 'vegetarian', 'family dining'],
+      email: 'contact@chennaispice.com',
+      website: 'https://chennaispice.com',
+      address: 'Mount Road, Near Anna Salai',
+      tags: ['tamil cuisine', 'chettinad', 'vegetarian', 'family dining'],
+      lat: 13.0827,
+      lng: 80.2707
+    },
+    {
+      name: 'The Madurai Biryani House',
+      description: 'Famous for authentic Dindigul style biryani and Madurai special mutton varieties.',
+      phone: '+91 98765 43211',
+      email: 'info@maduraibiryani.com',
+      website: 'https://maduraibiryani.com',
+      address: 'Goripalayam, Market Area',
+      tags: ['biryani', 'madurai special', 'non-veg', 'chettinad'],
+      lat: 9.9252,
+      lng: 78.1198
+    },
+    {
+      name: 'Marina Coastal Delights',
+      description: 'Fresh seafood restaurant near the coast. Daily catch prepared with local spices and coconut oil.',
+      phone: '+91 98765 43212',
+      email: 'hello@marinacoastal.com',
+      website: 'https://marinacoastal.com',
+      address: 'Beach Road, Waterfront',
+      tags: ['seafood', 'marina beach', 'fish', 'prawns'],
+      lat: 13.0475,
+      lng: 80.2824
+    },
+    {
+      name: 'Saravana Style Vegetarian',
+      description: 'Pure vegetarian restaurant offering high-quality South Indian meals and tiffin items.',
+      phone: '+91 98765 43213',
+      email: 'contact@saravanastyle.com',
+      website: 'https://saravanastyle.com',
+      address: 'T. Nagar, Usman Road',
+      tags: ['vegetarian', 'south indian', 'tiffin', 'meals'],
+      lat: 13.0405,
+      lng: 80.2337
+    },
+    {
+      name: 'Kovai Pizza Palace',
+      description: 'Wood-fired pizzas with fresh ingredients. International flavors with a local Coimbatore twist.',
+      phone: '+91 98765 43214',
+      email: 'orders@kovaipizza.com',
+      website: 'https://kovaipizza.com',
+      address: 'RS Puram, Shopping District',
+      tags: ['pizza', 'italian', 'fast food', 'kovai'],
       lat: 11.0168,
       lng: 76.9558
     },
     {
-      name: 'The Royal Biryani House',
-      description: 'Famous for authentic Hyderabadi biryani and Mughlai cuisine. Perfect for family gatherings and celebrations.',
-      phone: '+91 98765 43211',
-      email: 'info@royalbiryani.com',
-      website: 'https://royalbiryani.com',
-      address: 'Cross Road, Market Area',
-      tags: ['biryani', 'mughlai', 'north indian', 'catering'],
-      lat: 11.0178,
-      lng: 76.9568
-    },
-    {
-      name: 'Coastal Delights',
-      description: 'Fresh seafood restaurant with ocean views. Daily catch prepared with coastal spices and traditional methods.',
-      phone: '+91 98765 43212',
-      email: 'hello@coastaldelights.com',
-      website: 'https://coastaldelights.com',
-      address: 'Beach Road, Waterfront',
-      tags: ['seafood', 'coastal cuisine', 'fish', 'prawns'],
-      lat: 11.0188,
-      lng: 76.9578
-    },
-    {
-      name: 'Green Leaf Vegetarian',
-      description: 'Pure vegetarian restaurant offering South Indian, North Indian, and Chinese cuisines. Healthy and hygienic food.',
-      phone: '+91 98765 43213',
-      email: 'contact@greenleaf.com',
-      website: 'https://greenleaf.com',
-      address: 'Temple Street, Old Town',
-      tags: ['vegetarian', 'south indian', 'north indian', 'chinese'],
-      lat: 11.0198,
-      lng: 76.9588
-    },
-    {
-      name: 'Pizza Paradise',
-      description: 'Wood-fired pizzas with fresh ingredients. Italian cuisine with a local twist. Dine-in and home delivery available.',
-      phone: '+91 98765 43214',
-      email: 'orders@pizzaparadise.com',
-      website: 'https://pizzaparadise.com',
-      address: 'Mall Road, Shopping District',
-      tags: ['pizza', 'italian', 'pasta', 'fast food'],
-      lat: 11.0208,
-      lng: 76.9598
-    },
-    {
-      name: 'Chai & Chaat Corner',
-      description: 'Street food favorites and refreshing chai. Perfect spot for evening snacks and casual meetups.',
+      name: 'Filter Kaapi & Murukku Corner',
+      description: 'Famous Kumbakonam degree coffee and traditional Tamil snacks like Murukku and Athirasam.',
       phone: '+91 98765 43215',
-      email: 'info@chaichaat.com',
+      email: 'info@kaapicorner.com',
       website: '',
-      address: 'Station Road, Near Railway Station',
-      tags: ['street food', 'chaat', 'tea', 'snacks'],
-      lat: 11.0218,
-      lng: 76.9608
+      address: 'Mylapore, Near Temple',
+      tags: ['filter coffee', 'snacks', 'traditional', 'mylapore'],
+      lat: 13.0333,
+      lng: 80.2667
     }
   ],
   'Hotels': [
@@ -448,8 +448,8 @@ const generateGenericBusinesses = (category, count = 5) => {
       website: `https://${category.toLowerCase().replace(/\s+/g, '')}${i + 1}.com`,
       address: `${i + 1} Main Street, ${category} District`,
       tags: [category.toLowerCase(), 'professional', 'quality', 'service'],
-      lat: 11.0 + (i * 0.01),
-      lng: 76.95 + (i * 0.01)
+      lat: 13.0 + (i * 0.01),
+      lng: 80.2 + (i * 0.01)
     });
   }
   return businesses;
@@ -476,33 +476,29 @@ async function addDummyBusinesses() {
       return;
     }
 
-    // Get a default location
-    const defaultLocation = locations[0];
-    const defaultArea = defaultLocation.areas && defaultLocation.areas.length > 0 
-      ? defaultLocation.areas[0] 
-      : 'Central Area';
-
     let totalAdded = 0;
-
     // Add businesses for each category
     for (const category of categories) {
       console.log(`\n📦 Adding businesses for category: ${category.name}`);
       
       // Get businesses for this category (from templates or generate generic)
-      const businesses = businessTemplates[category.name] || generateGenericBusinesses(category.name, 5);
+      const businesses = businessTemplates[category.name] || generateGenericBusinesses(category.name, 10);
       
       for (const business of businesses) {
         try {
+          const randomLoc = locations[Math.floor(Math.random() * locations.length)];
+          const randomArea = randomLoc.areas[Math.floor(Math.random() * randomLoc.areas.length)];
+
           const businessData = {
             ...business,
             category: category.name,
             categoryIcon: category.icon || 'Building2',
-            district: defaultLocation.name,
-            area: defaultArea,
-            status: 'approved', // Auto-approve dummy data
-            featured: Math.random() > 0.7, // 30% chance of being featured
-            rating: Math.round((3 + Math.random() * 2) * 10) / 10, // Random rating between 3.0 and 5.0
-            reviewCount: Math.floor(Math.random() * 50), // Random review count
+            district: randomLoc.name,
+            area: randomArea,
+            status: 'approved',
+            featured: Math.random() > 0.8,
+            rating: Math.round((3.5 + Math.random() * 1.5) * 10) / 10,
+            reviewCount: Math.floor(Math.random() * 100),
             images: [],
             createdBy: 'admin',
             createdAt: serverTimestamp(),

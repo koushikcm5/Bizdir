@@ -31,98 +31,116 @@ const categories = [
   { name: 'Real Estate', icon: 'Home', color: '#f43f5e' },
 ];
 
-// Locations to add (Kerala districts with areas)
+// Locations to add (Tamil Nadu districts with areas)
+// Locations to add (All 38 Tamil Nadu districts)
 const locations = [
-  {
-    name: 'Kozhikode',
-    areas: ['Mavoor Road', 'Palazhi', 'Nadakkavu', 'Kallai', 'Beach Road', 'Medical College', 'Hilite City']
-  },
-  {
-    name: 'Malappuram',
-    areas: ['Manjeri', 'Perinthalmanna', 'Tirur', 'Ponnani', 'Nilambur', 'Kottakkal']
-  },
-  {
-    name: 'Kannur',
-    areas: ['Thalassery', 'Payyannur', 'Mattannur', 'Iritty', 'Taliparamba']
-  },
-  {
-    name: 'Wayanad',
-    areas: ['Kalpetta', 'Sulthan Bathery', 'Mananthavady', 'Vythiri']
-  },
-  {
-    name: 'Kasaragod',
-    areas: ['Kasaragod Town', 'Kanhangad', 'Nileshwar', 'Bekal']
-  }
-];
+  { name: 'Ariyalur', areas: ['Ariyalur Town', 'Jayankondam', 'Sendurai'] },
+  { name: 'Chengalpattu', areas: ['Chengalpattu Town', 'Tambaram', 'Pallavaram', 'Chromepet', 'Vandalur'] },
+  { name: 'Chennai', areas: ['T. Nagar', 'Adyar', 'Anna Nagar', 'Velachery', 'Mylapore', 'Nungambakkam', 'OMR', 'Guindy'] },
+  { name: 'Coimbatore', areas: ['Gandhipuram', 'RS Puram', 'Peelamedu', 'Saravanampatti', 'Race Course', 'Pollachi'] },
+  { name: 'Cuddalore', areas: ['Cuddalore Town', 'Chidambaram', 'Panruti', 'Neyveli'] },
+  { name: 'Dharmapuri', areas: ['Dharmapuri Town', 'Palacode', 'Harur', 'Pappireddipatti'] },
+  { name: 'Dindigul', areas: ['Dindigul Town', 'Palani', 'Kodaikanal', 'Oddanchatram'] },
+  { name: 'Erode', areas: ['Erode City', 'Perundurai', 'Bhavani', 'Gobichettipalayam'] },
+  { name: 'Kallakurichi', areas: ['Kallakurichi Town', 'Sankarapuram', 'Tirukkoyilur'] },
+  { name: 'Kancheepuram', areas: ['Kancheepuram Town', 'Sriperumbudur', 'Walajabad'] },
+  { name: 'Karur', areas: ['Karur Town', 'Kulithalai', 'Aravakurichi'] },
+  { name: 'Krishnagiri', areas: ['Krishnagiri Town', 'Hosur', 'Denkanikottai', 'Bargur'] },
+  { name: 'Madurai', areas: ['Anna Nagar', 'K.K. Nagar', 'Simmakkal', 'Tallakulam', 'Ellis Nagar', 'Thirumangalam'] },
+  { name: 'Mayiladuthurai', areas: ['Mayiladuthurai Town', 'Sirkazhi', 'Poompuhar'] },
+  { name: 'Nagapattinam', areas: ['Nagapattinam Town', 'Velankanni', 'Vedaranyam'] },
+  { name: 'Namakkal', areas: ['Namakkal Town', 'Rasipuram', 'Tiruchengode', 'Komarapalayam'] },
+  { name: 'Nilgiris', areas: ['Ooty', 'Coonoor', 'Gudalur', 'Kotagiri'] },
+  { name: 'Perambalur', areas: ['Perambalur Town', 'Veppanthattai', 'Kunnam'] },
+  { name: 'Pudukkottai', areas: ['Pudukkottai Town', 'Aranthangi', 'Illuppur'] },
+  { name: 'Ramanathapuram', areas: ['Ramanathapuram Town', 'Rameswaram', 'Paramakudi', 'Keezhakarai'] },
+  { name: 'Ranipet', areas: ['Ranipet Town', 'Arcot', 'Walajapet', 'Arakkonam'] },
+  { name: 'Salem', areas: ['Fairlands', 'Hasthampatti', 'Shevapet', 'Suramangalam', 'Mettur', 'Attur'] },
+  { name: 'Sivaganga', areas: ['Sivaganga Town', 'Karaikudi', 'Devakottai', 'Manamadurai'] },
+  { name: 'Tenkasi', areas: ['Tenkasi Town', 'Sankarankovil', 'Courtallam', 'Kadayanallur'] },
+  { name: 'Thanjavur', areas: ['Thanjavur City', 'Kumbakonam', 'Pattukkottai', 'Tiruvaiyaru'] },
+  { name: 'Theni', areas: ['Theni Town', 'Periyakulam', 'Bodinayakanur', 'Cumbum'] },
+  { name: 'Thoothukudi', areas: ['Thoothukudi City', 'Tiruchendur', 'Kovilpatti', 'Ettayapuram'] },
+  { name: 'Tiruchirappalli', areas: ['Thillai Nagar', 'Cantonment', 'Srirangam', 'Woraiyur', 'KK Nagar', 'Lalgudi'] },
+  { name: 'Tirunelveli', areas: ['Tirunelveli City', 'Palayamkottai', 'Ambasamudram', 'Valliyur'] },
+  { name: 'Tirupathur', areas: ['Tirupathur Town', 'Vaniyambadi', 'Ambur'] },
+  { name: 'Tiruppur', areas: ['Tiruppur City', 'Avinashi', 'Dharapuram', 'Udumalaipettai'] },
+  { name: 'Tiruvallur', areas: ['Tiruvallur Town', 'Avadi', 'Poonamallee', 'Ambattur', 'Gummidipoondi'] },
+  { name: 'Tiruvannamalai', areas: ['Tiruvannamalai Town', 'Arani', 'Chengam', 'Polur'] },
+  { name: 'Tiruvarur', areas: ['Tiruvarur Town', 'Mannargudi', 'Thiruthuraipoondi'] },
+  { name: 'Vellore', areas: ['Vellore City', 'Katpadi', 'Gudiyatham'] },
+  { name: 'Viluppuram', areas: ['Viluppuram Town', 'Tindivanam', 'Gingee'] },
+  { name: 'Virudhunagar', areas: ['Virudhunagar Town', 'Sivakasi', 'Rajapalayam', 'Aruppukkottai'] }
+].sort((a, b) => a.name.localeCompare(b.name));
 
 // Dummy business data templates
 const businessTemplates = {
   'Restaurants': [
     {
-      name: 'Spice Garden Restaurant',
-      description: 'Authentic Kerala cuisine with traditional recipes passed down through generations. Specializing in seafood and vegetarian dishes.',
+      name: 'Chennai Spice Garden',
+      description: 'Authentic Tamil Nadu cuisine with traditional recipes. Specializing in Chettinad dishes and vegetarian meals.',
       phone: '+91 98765 43210',
-      email: 'contact@spicegarden.com',
-      website: 'https://spicegarden.com',
-      address: 'MG Road, Near City Center',
-      tags: ['kerala cuisine', 'seafood', 'vegetarian', 'family dining'],
-      lat: 11.2588,
-      lng: 75.7804
+      email: 'contact@chennaispice.com',
+      website: 'https://chennaispice.com',
+      address: 'Mount Road, Near Anna Salai',
+      tags: ['tamil cuisine', 'chettinad', 'vegetarian', 'family dining'],
+      lat: 13.0827,
+      lng: 80.2707
     },
     {
-      name: 'The Royal Biryani House',
-      description: 'Famous for authentic Hyderabadi biryani and Mughlai cuisine. Perfect for family gatherings and celebrations.',
+      name: 'The Madurai Biryani House',
+      description: 'Famous for authentic Dindigul style biryani and Madurai special mutton varieties.',
       phone: '+91 98765 43211',
-      email: 'info@royalbiryani.com',
-      website: 'https://royalbiryani.com',
-      address: 'Cross Road, Market Area',
-      tags: ['biryani', 'mughlai', 'north indian', 'catering'],
-      lat: 11.2598,
-      lng: 75.7814
+      email: 'info@maduraibiryani.com',
+      website: 'https://maduraibiryani.com',
+      address: 'Goripalayam, Market Area',
+      tags: ['biryani', 'madurai special', 'non-veg', 'chettinad'],
+      lat: 9.9252,
+      lng: 78.1198
     },
     {
-      name: 'Coastal Delights',
-      description: 'Fresh seafood restaurant with ocean views. Daily catch prepared with coastal spices and traditional methods.',
+      name: 'Marina Coastal Delights',
+      description: 'Fresh seafood restaurant near the coast. Daily catch prepared with local spices and coconut oil.',
       phone: '+91 98765 43212',
-      email: 'hello@coastaldelights.com',
-      website: 'https://coastaldelights.com',
+      email: 'hello@marinacoastal.com',
+      website: 'https://marinacoastal.com',
       address: 'Beach Road, Waterfront',
-      tags: ['seafood', 'coastal cuisine', 'fish', 'prawns'],
-      lat: 11.2608,
-      lng: 75.7824
+      tags: ['seafood', 'marina beach', 'fish', 'prawns'],
+      lat: 13.0475,
+      lng: 80.2824
     },
     {
-      name: 'Green Leaf Vegetarian',
-      description: 'Pure vegetarian restaurant offering South Indian, North Indian, and Chinese cuisines. Healthy and hygienic food.',
+      name: 'Saravana Style Vegetarian',
+      description: 'Pure vegetarian restaurant offering high-quality South Indian meals and tiffin items.',
       phone: '+91 98765 43213',
-      email: 'contact@greenleaf.com',
-      website: 'https://greenleaf.com',
-      address: 'Temple Street, Old Town',
-      tags: ['vegetarian', 'south indian', 'north indian', 'chinese'],
-      lat: 11.2618,
-      lng: 75.7834
+      email: 'contact@saravanastyle.com',
+      website: 'https://saravanastyle.com',
+      address: 'T. Nagar, Usman Road',
+      tags: ['vegetarian', 'south indian', 'tiffin', 'meals'],
+      lat: 13.0405,
+      lng: 80.2337
     },
     {
-      name: 'Pizza Paradise',
-      description: 'Wood-fired pizzas with fresh ingredients. Italian cuisine with a local twist. Dine-in and home delivery available.',
+      name: 'Kovai Pizza Palace',
+      description: 'Wood-fired pizzas with fresh ingredients. International flavors with a local Coimbatore twist.',
       phone: '+91 98765 43214',
-      email: 'orders@pizzaparadise.com',
-      website: 'https://pizzaparadise.com',
-      address: 'Mall Road, Shopping District',
-      tags: ['pizza', 'italian', 'pasta', 'fast food'],
-      lat: 11.2628,
-      lng: 75.7844
+      email: 'orders@kovaipizza.com',
+      website: 'https://kovaipizza.com',
+      address: 'RS Puram, Shopping District',
+      tags: ['pizza', 'italian', 'fast food', 'kovai'],
+      lat: 11.0168,
+      lng: 76.9558
     },
     {
-      name: 'Chai & Chaat Corner',
-      description: 'Street food favorites and refreshing chai. Perfect spot for evening snacks and casual meetups.',
+      name: 'Filter Kaapi & Murukku Corner',
+      description: 'Famous Kumbakonam degree coffee and traditional Tamil snacks like Murukku and Athirasam.',
       phone: '+91 98765 43215',
-      email: 'info@chaichaat.com',
+      email: 'info@kaapicorner.com',
       website: '',
-      address: 'Station Road, Near Railway Station',
-      tags: ['street food', 'chaat', 'tea', 'snacks'],
-      lat: 11.2638,
-      lng: 75.7854
+      address: 'Mylapore, Near Temple',
+      tags: ['filter coffee', 'snacks', 'traditional', 'mylapore'],
+      lat: 13.0333,
+      lng: 80.2667
     }
   ],
   'Hotels': [
@@ -533,27 +551,27 @@ async function setupCompleteData() {
       return;
     }
 
-    const defaultLocation = addedLocations[0];
-    const defaultArea = defaultLocation.areas[0];
     let totalAdded = 0;
-
     for (const category of addedCategories) {
       console.log(`📦 Adding businesses for category: ${category.name}`);
       
-      const businesses = businessTemplates[category.name] || generateGenericBusinesses(category.name, 5);
+      const businesses = businessTemplates[category.name] || generateGenericBusinesses(category.name, 10);
       
       for (const business of businesses) {
         try {
+          const randomLoc = addedLocations[Math.floor(Math.random() * addedLocations.length)];
+          const randomArea = randomLoc.areas[Math.floor(Math.random() * randomLoc.areas.length)];
+
           const businessData = {
             ...business,
             category: category.name,
             categoryIcon: category.icon || 'Building2',
-            district: defaultLocation.name,
-            area: defaultArea,
+            district: randomLoc.name,
+            area: randomArea,
             status: 'approved',
-            featured: Math.random() > 0.7,
-            rating: Math.round((3 + Math.random() * 2) * 10) / 10,
-            reviewCount: Math.floor(Math.random() * 50),
+            featured: Math.random() > 0.8,
+            rating: Math.round((3.5 + Math.random() * 1.5) * 10) / 10,
+            reviewCount: Math.floor(Math.random() * 100),
             images: [],
             createdBy: 'admin',
             createdAt: serverTimestamp(),
