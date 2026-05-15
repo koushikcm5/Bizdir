@@ -499,7 +499,7 @@ async function addDummyBusinesses() {
             featured: Math.random() > 0.8,
             rating: Math.round((3.5 + Math.random() * 1.5) * 10) / 10,
             reviewCount: Math.floor(Math.random() * 100),
-            images: [],
+            images: [`/assets/dummy/${category.name.toLowerCase().replace(/\s+/g, '-')}.png`],
             createdBy: 'admin',
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
