@@ -30,6 +30,8 @@ const BusinessCard = ({ business }) => {
   const { user, userData, shortlisted, toggleShortlist } = useStore();
   const isSaved = shortlisted.includes(business.id);
 
+  const [imgError, setImgError] = React.useState(false);
+
   const handleSave = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -54,12 +56,13 @@ const BusinessCard = ({ business }) => {
     >
       {/* Image */}
       <div className="relative h-44 bg-gradient-to-br from-surface-100 to-surface-200 overflow-hidden">
-        {business.images?.[0] ? (
+        {business.images?.[0] && !imgError ? (
           <img
             src={business.images[0]}
             alt={business.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
