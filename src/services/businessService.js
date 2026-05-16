@@ -99,6 +99,23 @@ export const deleteBusiness = async (id) => {
 export const updateBusinessStatus = async (id, status) => {
   await updateDoc(doc(db, BUSINESSES, id), { status, updatedAt: serverTimestamp() });
 };
+export const upsertBusiness = async (data) => {
+  const q = query(collection(db, BUSINESSES), where('name', '==', data.name));
+  const snap = await getDocs(q);
+  
+  if (!snap.empty) {
+    const docId = snap.docs[0].id;
+    await updateDoc(doc(db, BUSINESSES, docId), { ...data, updatedAt: serverTimestamp() });
+    return { id: docId, type: 'update' };
+  } else {
+    const docRef = await addDoc(collection(db, BUSINESSES), {
+      ...data,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+    return { id: docRef.id, type: 'create' };
+  }
+};
 
 // ── Images ───────────────────────────────────────────────────────────────────
 // Storage is disabled during testing. Enable when Firebase Storage is set up.

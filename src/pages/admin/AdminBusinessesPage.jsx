@@ -1,10 +1,11 @@
 // src/pages/admin/AdminBusinessesPage.jsx
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Plus, Edit2, Trash2, Check, X, Search } from 'lucide-react';
+import { Plus, Edit2, Trash2, Check, X, Search, Upload } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { getAllBusinesses, updateBusinessStatus, deleteBusiness } from '../../services/businessService';
+import { getAllBusinesses, updateBusinessStatus, deleteBusiness, upsertBusiness } from '../../services/businessService';
 import Button from '../../components/common/Button';
+import * as XLSX from 'xlsx';
 import Modal from '../../components/common/Modal';
 import BusinessForm from '../../components/business/BusinessForm';
 import Spinner from '../../components/common/Spinner';
@@ -63,6 +64,74 @@ const AdminBusinessesPage = () => {
     }
   };
 
+  const handleExcelUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setImporting(true);
+    const toastId = toast.loading('Processing Excel file...');
+
+    try {
+      const reader = new FileReader();
+      reader.onload = async (evt) => {
+        const bstr = evt.target.result;
+        const wb = XLSX.read(bstr, { type: 'binary' });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        const data = XLSX.utils.sheet_to_json(ws);
+
+        let successCount = 0;
+        let errorCount = 0;
+
+        for (const row of data) {
+          if (!row.name || !row.category) {
+            errorCount++;
+            continue;
+          }
+
+          try {
+            const businessData = {
+              name: String(row.name).trim(),
+              category: String(row.category),
+              district: String(row.district || ''),
+              area: String(row.area || ''),
+              address: String(row.address || ''),
+              phone: String(row.phone || ''),
+              email: String(row.email || ''),
+              website: String(row.website || ''),
+              description: String(row.description || ''),
+              lat: parseFloat(row.lat) || 0,
+              lng: parseFloat(row.lng) || 0,
+              rating: parseFloat(row.rating) || 0,
+              reviewCount: parseInt(row.reviewCount) || 0,
+              featured: row.featured === true || String(row.featured).toLowerCase() === 'true',
+              tags: row.tags ? String(row.tags).split(',').map(t => t.trim()).filter(Boolean) : [],
+              images: row.images ? String(row.images).split(',').map(img => img.trim()).filter(Boolean) : [],
+              status: 'approved',
+              categoryIcon: 'Building2', // Default
+            };
+
+            await upsertBusiness(businessData);
+            successCount++;
+          } catch (err) {
+            errorCount++;
+            console.error('Import row error:', err);
+          }
+        }
+
+        toast.success(`Import finished! ${successCount} successful, ${errorCount} skipped.`, { id: toastId });
+        setImporting(false);
+        load();
+      };
+      reader.readAsBinaryString(file);
+    } catch (err) {
+      toast.error('Failed to read file', { id: toastId });
+      setImporting(false);
+    }
+    // Clear input
+    e.target.value = '';
+  };
+
   return (
     <>
       <Helmet><title>Manage Businesses – Admin</title></Helmet>
@@ -86,7 +155,14 @@ const AdminBusinessesPage = () => {
               placeholder="All Status"
               className="w-full sm:w-40"
             />
-            <Button icon={Plus} onClick={() => setAddModal(true)} size="sm">Add Business</Button>
+            <div className="flex gap-2">
+              <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-surface-200 rounded-lg text-sm font-body font-medium text-surface-700 hover:bg-surface-50 cursor-pointer transition-colors">
+                <Upload size={14} />
+                <span>Upload Excel</span>
+                <input type="file" accept=".xlsx, .xls, .csv" onChange={handleExcelUpload} className="hidden" disabled={importing} />
+              </label>
+              <Button icon={Plus} onClick={() => setAddModal(true)} size="sm">Add Business</Button>
+            </div>
           </div>
 
           {/* Table */}

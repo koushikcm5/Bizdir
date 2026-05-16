@@ -1,0 +1,3 @@
+name,category,district,area,address,phone,email,website,description,lat,lng,rating,reviewCount,featured,tags,images
+Sample Business,Restaurants,Chennai,Anna Salai,123 Anna Salai,919876543210,sample@test.com,https://test.com,Delicious food,13.0827,80.2707,4.5,100,true,"food, delicious, chennai","https://example.com/img1.jpg, https://example.com/img2.jpg"
+Existing Business,Electronics,Madurai,Bazaar Street,45 Bazaar St,919876543211,electronics@test.com,,Latest gadgets,9.9252,78.1198,3.8,50,false,"electronics, gadgets",
