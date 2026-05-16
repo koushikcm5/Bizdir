@@ -13,27 +13,29 @@ import { getLocations, getCategories } from './services/locationService';
 import useStore from './store/useStore';
 import { MOCK_CATEGORIES, MOCK_LOCATIONS } from './utils/helpers';
 
+import { lazyRetry } from './utils/lazyRetry';
+
 // Lazy loaded pages
-const HomePage = lazy(() => import('./pages/HomePage'));
-const SearchPage = lazy(() => import('./pages/SearchPage'));
-const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
-const UserDashboardPage = lazy(() => import('./pages/UserDashboardPage'));
-const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const HomePage = lazyRetry(() => import('./pages/HomePage'));
+const SearchPage = lazyRetry(() => import('./pages/SearchPage'));
+const BusinessDetailPage = lazyRetry(() => import('./pages/BusinessDetailPage'));
+const LoginPage = lazyRetry(() => import('./pages/LoginPage'));
+const RegisterPage = lazyRetry(() => import('./pages/RegisterPage'));
+const UserDashboardPage = lazyRetry(() => import('./pages/UserDashboardPage'));
+const FavoritesPage = lazyRetry(() => import('./pages/FavoritesPage'));
+const NotFoundPage = lazyRetry(() => import('./pages/NotFoundPage'));
 
 // Admin pages
-const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'));
-const AdminBusinessesPage = lazy(() => import('./pages/admin/AdminBusinessesPage'));
-const AdminCategoriesPage = lazy(() => import('./pages/admin/AdminCategoriesPage'));
-const AdminPendingPage = lazy(() => import('./pages/admin/AdminPendingPage'));
+const AdminDashboardPage = lazyRetry(() => import('./pages/admin/AdminDashboardPage'));
+const AdminBusinessesPage = lazyRetry(() => import('./pages/admin/AdminBusinessesPage'));
+const AdminCategoriesPage = lazyRetry(() => import('./pages/admin/AdminCategoriesPage'));
+const AdminPendingPage = lazyRetry(() => import('./pages/admin/AdminPendingPage'));
 
 // Super Admin pages
-const SuperAdminDashboardPage = lazy(() => import('./pages/superadmin/SuperAdminDashboardPage'));
-const SuperAdminUsersPage = lazy(() => import('./pages/superadmin/SuperAdminUsersPage'));
-const SuperAdminBusinessesPage = lazy(() => import('./pages/superadmin/SuperAdminBusinessesPage'));
-const SuperAdminLocationsPage = lazy(() => import('./pages/superadmin/SuperAdminLocationsPage'));
+const SuperAdminDashboardPage = lazyRetry(() => import('./pages/superadmin/SuperAdminDashboardPage'));
+const SuperAdminUsersPage = lazyRetry(() => import('./pages/superadmin/SuperAdminUsersPage'));
+const SuperAdminBusinessesPage = lazyRetry(() => import('./pages/superadmin/SuperAdminBusinessesPage'));
+const SuperAdminLocationsPage = lazyRetry(() => import('./pages/superadmin/SuperAdminLocationsPage'));
 
 const PageLoader = () => (
   <div className="min-h-[50vh] flex items-center justify-center">
