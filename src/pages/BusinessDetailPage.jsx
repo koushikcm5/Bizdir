@@ -35,6 +35,7 @@ const BusinessDetailPage = () => {
   const [reviewForm, setReviewForm] = useState({ rating: 0, comment: '' });
   const [submitting, setSubmitting] = useState(false);
   const [imgErrors, setImgErrors] = useState({});
+  const isSaved = shortlisted.includes(id);
 
   useEffect(() => {
     Promise.all([getBusinessById(id), getReviewsForBusiness(id)])
