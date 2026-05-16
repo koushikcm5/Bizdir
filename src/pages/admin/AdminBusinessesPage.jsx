@@ -22,6 +22,7 @@ const AdminBusinessesPage = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [addModal, setAddModal] = useState(false);
   const [editBiz, setEditBiz] = useState(null);
+  const [importing, setImporting] = useState(false);
 
   const load = async () => {
     setLoading(true);

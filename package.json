@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^10.4.0",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "firebase": "^10.8.0",
